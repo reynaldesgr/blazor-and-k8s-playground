@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.0.0-preview.6.24353.1" />
+      <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="8.1.0" />
+      <PackageReference Include="OpenTelemetry" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Api" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.6.0-rc.1" />
+      <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Exporter.Prometheus" Version="1.3.0-rc.2" />
+      <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.9.0-beta.2" />
+      <PackageReference Include="OpenTelemetry.Extensions" Version="1.0.0-beta.5" />
+      <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.9.0-beta.1" />
+      <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.9.0" />
+      <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="AppHost\**" />
+      <Compile Remove="ServiceDefaults\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="AppHost\**" />
+      <EmbeddedResource Remove="ServiceDefaults\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="AppHost\**" />
+      <Content Remove="ServiceDefaults\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="AppHost\**" />
+      <None Remove="ServiceDefaults\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="AppHost\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="AppHost\appsettings.json" />
+      <_ContentIncludedByDefault Remove="AppHost\obj\AppHost.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="AppHost\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="AppHost\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="AppHost\Properties\launchSettings.json" />
+      <_ContentIncludedByDefault Remove="ServiceDefaults\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="ServiceDefaults\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="ServiceDefaults\obj\ServiceDefaults.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+</Project>
