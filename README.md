@@ -20,6 +20,7 @@ Minikube is an open-source tool that enables to runn a single-node Kubernetes (b
 ```sh
 # Start
 minikube start
+minikube start --driver=<driver-name>
 
 # Stop
 minikube stop
@@ -39,6 +40,14 @@ kubectl cluster-info
 # View nodes
 kubectl get nodes
 
+# View pods
+kubectl get pods { app=<app-name> }
+# M ore verbose with IP address
+kubect get pods -o wide 
+
+# View deployment
+kubectl get deployment
+
 # SSH into Minikube VM
 minikube ssh (driver == docker) else : ssh docker@ip-minikube
 ```
@@ -50,10 +59,15 @@ kubectl get services
 
 # Expose a service
 kubectl expose deployment <deployment-name> --type=NodePort --port=8080
+# If the port is different from the target port
+kubectl expose deployment <deploymen-name> --port=8080 --target-port=<target-port>
 
 # Access Minikube IP
 minikube ip
 
 # Access Service via NodePort
 minikube service <service-name>
+
+# Scale a deployment
+kubectl scale deployment <my-deployment> --replicas=<n>
 ```
