@@ -142,3 +142,50 @@ kubectl get svc
 minikube ssh
 docker@minikube:~$ curl 10.96.2.182:8080
 ```
+## Expose services
+
+```bash
+minikube service blazorapp
+
+🏃  Tunnel de démarrage pour le service blazorapp.
+|-----------|-----------|-------------|------------------------|
+| NAMESPACE |   NAME    | TARGET PORT |          URL           |
+|-----------|-----------|-------------|------------------------|
+| default   | blazorapp |             | http://127.0.0.1:35085 |
+|-----------|-----------|-------------|------------------------|
+🎉  Ouverture du service default/blazorapp dans le navigateur par défaut...
+```
+
+## Create Load Balancer Service
+```bash
+>> kubectl expose deployment blazorapp --type=LoadBalancer --port=3000
+service/blazorapp exposed
+```
+In Kubernetes, both LoadBalancer and NodePort are service types used to expose applications outside the cluster, but they differ significantly in how they provide access and where they're typically used.
+
+* `NodePort` exposes a service on a specific port on every node of the cluster (usually a high port in the range 30000–32767). It opens a port on each worker node's IP address and routes traffic to the service.
+
+
+* `LoadBalancer` works in conjunction with cloud providers (like AWS, Google Cloud, Azure) to provision an external load balancer that automatically distributes incoming traffic across the pods in your service.
+
+
+
+`EXTERNAL-IP` will be pending if using `minikube`.
+
+* Cloud providers such as Amazon and Google Cloud automatically assign a load balancer IP address.
+```bash
+NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+blazorapp    LoadBalancer   10.104.32.65   <pending>     3000:30563/TCP   16s
+kubernetes   ClusterIP      10.96.0.1      <none>        443/TCP          32d
+```
+
+## Rolling update of the deployment
+Lorsque vous effectuez une mise à jour avec la stratégie `RollingUpdate`, Kubernetes remplace les anciens pods par des nouveaux de manière incrémentale, en suivant les paramètres spécifiés pour garantir que l'application reste disponible durant la mise à jour.
+
+```bash
+# Version changes
+kubectl set image deploymeny blazorapp blazorapp=reynaldesgr/blazorapp:2.0.0
+
+# Rollout imagess
+kubectl rollout status deploy blazorapp
+```
